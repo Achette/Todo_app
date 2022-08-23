@@ -2,24 +2,31 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
+  const ENTER_KEY = 13;
+  const ESCAPE_KEY = 27;
 
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState("");
 
   const onChangeInput = (event) => {
-    setValue(event.target.value)
-  }
+    setValue(event.target.value);
+  };
+
+  const submit = () => {
+    console.log("submit", value);
+    erase();
+  };
 
   const erase = () => {
-    setValue('')
-  }
+    setValue("");
+  };
 
   const onKeyDown = (event) => {
-    if(event.which === 13) {
-    console.log(value)
-    } else if (event.which === 27) {
-      erase()
+    if (event.which === ENTER_KEY) {
+      submit();
+    } else if (event.which === ESCAPE_KEY) {
+      erase();
     }
-  }
+  };
 
   return (
     <section id="app" className="container">
@@ -28,12 +35,12 @@ function App() {
       </header>
 
       <section className="main">
-        <input 
-        className="new-todo"
-        value={value}
-        onChange={onChangeInput}
-        placeholder="o que precisa ser feito?" 
-        onKeyDown={onKeyDown}
+        <input
+          className="new-todo"
+          value={value}
+          onChange={onChangeInput}
+          placeholder="o que precisa ser feito?"
+          onKeyDown={onKeyDown}
         />
       </section>
     </section>

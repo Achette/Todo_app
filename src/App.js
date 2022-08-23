@@ -5,16 +5,28 @@ function App() {
   const ENTER_KEY = 13;
   const ESCAPE_KEY = 27;
 
+  const initialTodos = [
+    { id: 1, title: 'Estudar React', checked: false}
+  ]
+
   const [value, setValue] = useState("");
+  const [todos, setTodos] = useState(initialTodos)
+
 
   const onChangeInput = (event) => {
     setValue(event.target.value);
   };
 
   const submit = () => {
-    console.log("submit", value);
+    addTodo()
+    console.log("submit", todos);
     erase();
   };
+
+  const addTodo = () => {
+
+    setTodos([...todos, { value }])
+  }
 
   const erase = () => {
     setValue("");
@@ -42,6 +54,12 @@ function App() {
           placeholder="o que precisa ser feito?"
           onKeyDown={onKeyDown}
         />
+
+        <ul className="todo-list">
+          {todos.map((todo) => (
+            <li key={todo.id}>{todo.title} {todo.checked}</li>
+          ))}
+        </ul>
       </section>
     </section>
   );

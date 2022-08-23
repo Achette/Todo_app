@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
 
 function App() {
+
+  const [value, setValue] = useState('')
+
+  const onChangeInput = (event) => {
+    setValue(event.target.value)
+  }
+
+  const erase = () => {
+    setValue('')
+  }
+
+  const onKeyDown = (event) => {
+    if(event.which === 13) {
+    console.log(value)
+    } else if (event.which === 27) {
+      erase()
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <section id="app" className="container">
+      <header>
+        <h1 className="title">todo</h1>
       </header>
-    </div>
+
+      <section className="main">
+        <input 
+        className="new-todo"
+        value={value}
+        onChange={onChangeInput}
+        placeholder="o que precisa ser feito?" 
+        onKeyDown={onKeyDown}
+        />
+      </section>
+    </section>
   );
 }
 

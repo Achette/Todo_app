@@ -1,33 +1,31 @@
 import { useState } from "react";
-import { MdDelete} from 'react-icons/md'
+import { MdDelete } from "react-icons/md";
 import "./App.css";
 
 function App() {
   const ENTER_KEY = 13;
   const ESCAPE_KEY = 27;
 
-  const initialTodos = [
-    { id: 1, title: 'Estudar React', checked: false}
-  ]
-
   const [value, setValue] = useState("");
-  const [todos, setTodos] = useState(initialTodos)
-
+  const [todos, setTodos] = useState([]);
 
   const onChangeInput = (event) => {
     setValue(event.target.value);
   };
 
   const submit = () => {
-    addTodo()
-    console.log("submit", todos);
+    addTodo();
+    /*   console.log("submit", todos); */
     erase();
   };
 
   const addTodo = () => {
-
-    setTodos([...todos, { value }])
-  }
+    const id = new Date().getTime() //opção para ids
+    setTodos([
+      ...todos,
+      { id: todos.length + 1, title: value, checked: false },
+    ]);
+  };
 
   const erase = () => {
     setValue("");
@@ -59,13 +57,11 @@ function App() {
         <ul className="todo-list">
           {todos.map((todo) => (
             <li key={todo.id}>
-              <span className="todo">
-                {todo.title}
-              </span>
+              <span className="todo">{todo.title}</span>
               <button className="remove" type="button">
-                <MdDelete size={28}/>
+                <MdDelete size={28} />
               </button>
-              </li>
+            </li>
           ))}
         </ul>
       </section>

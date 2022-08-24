@@ -20,10 +20,10 @@ function App() {
   };
 
   const addTodo = () => {
-    const id = new Date().getTime() //opção para ids
+    const id = new Date().getTime(); //opção para ids
     setTodos([
       ...todos,
-      { id: todos.length + 1, title: value, checked: false },
+      { id: id, title: value, checked: false },
     ]);
   };
 
@@ -37,6 +37,14 @@ function App() {
     } else if (event.which === ESCAPE_KEY) {
       erase();
     }
+  };
+
+  const onToggle = (todo) => {
+    setTodos(
+      todos.map((obj) => (obj.id === todo.id ? { ...obj, checked: !todo.checked } : obj))
+    );
+
+    console.log(`toogle: ${todos}`);
   };
 
   return (
@@ -57,7 +65,15 @@ function App() {
         <ul className="todo-list">
           {todos.map((todo) => (
             <li key={todo.id}>
-              <span className="todo">{todo.title}</span>
+              <span
+                className={['todo', todo.checked ? 'checked' : ''].join(" ")}
+                onClick={() => onToggle(todo)}
+                onKeyDown={() => onToggle(todo)}
+                role="button"
+                tabIndex={0}
+              >
+                {todo.title}
+              </span>
               <button className="remove" type="button">
                 <MdDelete size={28} />
               </button>

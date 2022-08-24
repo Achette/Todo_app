@@ -21,10 +21,7 @@ function App() {
 
   const addTodo = () => {
     const id = new Date().getTime(); //opção para ids
-    setTodos([
-      ...todos,
-      { id: id, title: value, checked: false },
-    ]);
+    setTodos([...todos, { id: id, title: value, checked: false }]);
   };
 
   const erase = () => {
@@ -41,10 +38,16 @@ function App() {
 
   const onToggle = (todo) => {
     setTodos(
-      todos.map((obj) => (obj.id === todo.id ? { ...obj, checked: !todo.checked } : obj))
+      todos.map((obj) =>
+        obj.id === todo.id ? { ...obj, checked: !todo.checked } : obj
+      )
     );
 
-    console.log(`toogle: ${todos}`);
+    //console.log(`toogle: ${todos}`);
+  };
+
+  const removeTodo = (todo) => {
+    setTodos(todos.filter((obj) => obj.id !== todo.id));
   };
 
   return (
@@ -66,7 +69,7 @@ function App() {
           {todos.map((todo) => (
             <li key={todo.id}>
               <span
-                className={['todo', todo.checked ? 'checked' : ''].join(" ")}
+                className={["todo", todo.checked ? "checked" : ""].join(" ")}
                 onClick={() => onToggle(todo)}
                 onKeyDown={() => onToggle(todo)}
                 role="button"
@@ -74,7 +77,11 @@ function App() {
               >
                 {todo.title}
               </span>
-              <button className="remove" type="button">
+              <button
+                className="remove"
+                type="button"
+                onClick={() => removeTodo(todo)}
+              >
                 <MdDelete size={28} />
               </button>
             </li>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { MdDelete} from 'react-icons/md'
 import "./App.css";
 
 function App() {
@@ -57,7 +58,14 @@ function App() {
 
         <ul className="todo-list">
           {todos.map((todo) => (
-            <li key={todo.id}>{todo.title} {todo.checked}</li>
+            <li key={todo.id}>
+              <span className="todo">
+                {todo.title}
+              </span>
+              <button className="remove" type="button">
+                <MdDelete size={28}/>
+              </button>
+              </li>
           ))}
         </ul>
       </section>

@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { MdDelete } from "react-icons/md";
+
+import './style.css'
 
 import PropTypes from "prop-types";
 

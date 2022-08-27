@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import './style.css'
 import PropTypes from "prop-types";
 
 export const Input = ({ onNewTodo }) => {

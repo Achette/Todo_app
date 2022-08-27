@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import PropTypes from "prop-types";
+
 export const Input = ({ onNewTodo }) => {
   const ENTER_KEY = 13;
   const ESCAPE_KEY = 27;
@@ -10,8 +12,6 @@ export const Input = ({ onNewTodo }) => {
     setValue(event.target.value);
   };
 
-
-
   const onKeyDown = (event) => {
     if (event.which === ENTER_KEY) {
       submit();
@@ -21,10 +21,12 @@ export const Input = ({ onNewTodo }) => {
   };
 
   const submit = () => {
-    onNewTodo(value)
+    if (onNewTodo) {
+      onNewTodo(value);
+      erase();
+    }
 
     /*   console.log("submit", todos); */
-    erase();
   };
 
   const erase = () => {
@@ -40,4 +42,8 @@ export const Input = ({ onNewTodo }) => {
       onKeyDown={onKeyDown}
     />
   );
+};
+
+Input.propTypes = {
+  onNewTodo: PropTypes.func.isRequired,
 };

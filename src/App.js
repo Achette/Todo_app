@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { MdDelete } from "react-icons/md";
 import "./App.css";
 import { Input } from "./components/input";
+import { TodoList } from "./components/todoList";
 
 function App() {
+  
   const [todos, setTodos] = useState([]);
 
   const oneNewTodo = (value) => {
@@ -32,29 +33,7 @@ function App() {
 
       <section className="main">
         <Input onNewTodo={oneNewTodo} />
-
-        <ul className="todo-list">
-          {todos.map((todo) => (
-            <li key={todo.id}>
-              <span
-                className={["todo", todo.checked ? "checked" : ""].join(" ")}
-                onClick={() => onToggle(todo)}
-                onKeyDown={() => onToggle(todo)}
-                role="button"
-                tabIndex={0}
-              >
-                {todo.title}
-              </span>
-              <button
-                className="remove"
-                type="button"
-                onClick={() => removeTodo(todo)}
-              >
-                <MdDelete size={28} />
-              </button>
-            </li>
-          ))}
-        </ul>
+        <TodoList todos={todos} onToggle={onToggle} onRemove={removeTodo} />
       </section>
     </section>
   );

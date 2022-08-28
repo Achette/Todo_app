@@ -1,10 +1,10 @@
 import { useState } from "react";
-import "./App.css";
 import { Input } from "./components/input";
 import { TodoList } from "./components/todoList";
 
+
 function App() {
-  
+
   const [todos, setTodos] = useState([]);
 
   const oneNewTodo = (value) => {
